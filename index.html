@@ -1,12 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Rincón del Trago - Menú</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="settings/style.css">
+    <link rel="stylesheet" href="./settings/css/style.css">
+    <style>
+        body {
+            background-color: #fff8f0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .menu-header {
+            background-color: #ff6600;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .menu-section {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            border-bottom: 3px solid #ff6600;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #ff6600;
+        }
+
+        .menu-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-card:hover {
+            transform: scale(1.02);
+        }
+
+        .menu-img {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .menu-price {
+            font-weight: bold;
+            color: #ff6600;
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,52 +63,118 @@
         <p>¡Disfruta de nuestros deliciosos platillos y bebidas!</p>
     </header>
 
-    <div class="container mt-4">
+    <div class="container mt-5">
         <!-- Comida -->
         <div class="menu-section">
-            <h2>Comida</h2>
-            <div class="menu-item">
-                <span>Alitas BBQ, sencillas</span>
-                <span>$120.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Papas a la francesa</span>
-                <span>$80.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Boneles</span>
-                <span>$150.00</span>
+            <h2 class="section-title">Comida</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/alitasBBQ.png" class="card-img-top menu-img" alt="Alitas BBQ"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Alitas BBQ, sencillas</h5>
+                            <p class="menu-price">$120.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/papasFrancesas.jpg" class="card-img-top menu-img"
+                            alt="Papas a la francesa" style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Papas a la francesa</h5>
+                            <p class="menu-price">$80.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/boneless.jpg" class="card-img-top menu-img" alt="Boneles"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Boneless</h5>
+                            <p class="menu-price">$150.00</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Bebidas -->
         <div class="menu-section">
-            <h2>Bebidas</h2>
-            <div class="menu-item">
-                <span>Micheladas</span>
-                <span>$90.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Pitufos</span>
-                <span>$100.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Piñas coladas</span>
-                <span>$110.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Palomas</span>
-                <span>$85.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Mojitos</span>
-                <span>$95.00</span>
-            </div>
-            <div class="menu-item">
-                <span>Cantaritos</span>
-                <span>$120.00</span>
+            <h2 class="section-title">Bebidas</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/micheladas.jpg" class="card-img-top menu-img" alt="Micheladas"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Micheladas</h5>
+                            <p class="menu-price">$90.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/pitufos.jpg" class="card-img-top menu-img" alt="Pitufos"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Pitufos</h5>
+                            <p class="menu-price">$100.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/colada.jpg" class="card-img-top menu-img" alt="Piñas coladas"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Piñas coladas</h5>
+                            <p class="menu-price">$110.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/palomas.jpg" class="card-img-top menu-img" alt="Palomas"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Palomas</h5>
+                            <p class="menu-price">$85.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/mojito.jpg" class="card-img-top menu-img" alt="Mojitos"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Mojitos</h5>
+                            <p class="menu-price">$95.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card menu-card">
+                        <img src="./settings/img/cantaritos.jpg" class="card-img-top menu-img" alt="Cantaritos"
+                            style="height: 200px; width: 100%;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Cantaritos</h5>
+                            <p class="menu-price">$120.00</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
