@@ -13,6 +13,10 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         .menu-header {
             background-color: #ff6600;
             color: white;
@@ -54,6 +58,33 @@
             color: #ff6600;
             font-size: 1.2rem;
         }
+
+        .nav-wrapper {
+            background: linear-gradient(to right, #ff6600, #ff944d);
+            padding: 0.5rem 0;
+            border-bottom: 2px solid #ff6600;
+        }
+
+        .nav-tabs .nav-link {
+            color: white;
+            font-weight: 500;
+            border-radius: 20px;
+            margin: 0 0.25rem;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: white;
+            color: #ff6600;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -63,9 +94,49 @@
         <p>¡Disfruta de nuestros deliciosos platillos y bebidas!</p>
     </header>
 
+    <nav class="sticky-top z-3 nav-wrapper shadow-sm">
+        <ul class="nav nav-tabs container justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="#combos">Combos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#comida">Comida</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#bebidas">Bebidas</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="combos" style="background-color: #ffe5cc; padding: 2rem;">
+        <div class="container text-center">
+            <h2 style="color: #cc4400; font-weight: bold; margin-bottom: 1.5rem;">🥳 Combos Especiales</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5">
+                    <div class="card border-warning shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning fw-bold">Combo 1</h5>
+                            <p class="card-text">Alitas + Papas + 2 Micheladas</p>
+                            <p class="menu-price">$250.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card border-warning shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning fw-bold">Combo 2</h5>
+                            <p class="card-text">Cubeta de cerveza + Snack a elegir</p>
+                            <p class="menu-price">$300.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="container mt-5">
         <!-- Comida -->
-        <div class="menu-section">
+        <div id="comida" class="menu-section">
             <h2 class="section-title">Comida</h2>
             <div class="row g-4">
                 <div class="col-md-4">
@@ -104,7 +175,7 @@
         </div>
 
         <!-- Bebidas -->
-        <div class="menu-section">
+        <div id="bebidas" class="menu-section">
             <h2 class="section-title">Bebidas</h2>
             <div class="row g-4">
                 <div class="col-md-4">
