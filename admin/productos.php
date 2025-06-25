@@ -10,19 +10,37 @@ $mensaje = '';
 $categorias = Categoria::todas();
 // Agregar
 if (isset($_POST['agregar'])) {
-    if (Producto::crear($_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['imagen'], $_POST['categoria_id'])) {
-        $mensaje = 'Producto agregado correctamente.';
-    } else {
-        $mensaje = 'Error al agregar.';
+    $imagen = '';
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES['imagen']['tmp_name'];
+        $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+        $permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        if (in_array($ext, $permitidas) && exif_imagetype($tmp_name)) {
+            $nuevo_nombre = uniqid('prod_') . '.' . $ext;
+            move_uploaded_file($tmp_name, __DIR__ . '/../settings/img/' . $nuevo_nombre);
+            $imagen = $nuevo_nombre;
+        }
     }
+    Producto::crear($_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $imagen, $_POST['categoria_id']);
+    header('Location: productos.php');
+    exit;
 }
 // Editar
 if (isset($_POST['editar'])) {
-    if (Producto::editar($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['imagen'], $_POST['categoria_id'])) {
-        $mensaje = 'Producto editado correctamente.';
-    } else {
-        $mensaje = 'Error al editar.';
+    $imagen = $_POST['imagen_actual'] ?? '';
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES['imagen']['tmp_name'];
+        $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+        $permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        if (in_array($ext, $permitidas) && exif_imagetype($tmp_name)) {
+            $nuevo_nombre = uniqid('prod_') . '.' . $ext;
+            move_uploaded_file($tmp_name, __DIR__ . '/../settings/img/' . $nuevo_nombre);
+            $imagen = $nuevo_nombre;
+        }
     }
+    Producto::editar($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $imagen, $_POST['categoria_id']);
+    header('Location: productos.php');
+    exit;
 }
 // Deshabilitar
 if (isset($_POST['deshabilitar'])) {
@@ -50,7 +68,7 @@ $productos = Producto::todos();
         <?php if ($mensaje): ?>
             <div class="alert alert-info"><?php echo $mensaje; ?></div>
         <?php endif; ?>
-        <form method="post" class="row g-3 mb-4">
+        <form method="post" class="row g-3 mb-4" enctype="multipart/form-data">
             <div class="col-md-2">
                 <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
             </div>
@@ -61,7 +79,7 @@ $productos = Producto::todos();
                 <input type="number" step="0.01" name="precio" class="form-control" placeholder="Precio" required>
             </div>
             <div class="col-md-2">
-                <input type="text" name="imagen" class="form-control" placeholder="Imagen (ej: boneless.jpg)" required>
+                <input type="file" name="imagen" class="form-control" accept="image/*">
             </div>
             <div class="col-md-2">
                 <select name="categoria_id" class="form-select" required>
@@ -90,12 +108,21 @@ $productos = Producto::todos();
             <tbody>
                 <?php foreach ($productos as $prod): ?>
                     <tr>
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <td><?php echo $prod['id']; ?><input type="hidden" name="id" value="<?php echo $prod['id']; ?>"></td>
                             <td><input type="text" name="nombre" value="<?php echo $prod['nombre']; ?>" class="form-control" required></td>
                             <td><input type="text" name="descripcion" value="<?php echo $prod['descripcion']; ?>" class="form-control" required></td>
                             <td><input type="number" step="0.01" name="precio" value="<?php echo $prod['precio']; ?>" class="form-control" required></td>
-                            <td><input type="text" name="imagen" value="<?php echo $prod['imagen']; ?>" class="form-control" required></td>
+                            <td style="min-width:120px">
+                                <?php if ($prod['imagen']): ?>
+                                    <img src="../settings/img/<?php echo $prod['imagen']; ?>" alt="img" style="max-width:50px;max-height:50px;object-fit:cover;display:block;margin-bottom:2px;">
+                                    <small class="text-muted d-block mb-1"><?php echo $prod['imagen']; ?></small>
+                                <?php else: ?>
+                                    <span class="text-muted">Sin imagen</span>
+                                <?php endif; ?>
+                                <input type="file" name="imagen" class="form-control" accept="image/*">
+                                <input type="hidden" name="imagen_actual" value="<?php echo $prod['imagen']; ?>">
+                            </td>
                             <td>
                                 <select name="categoria_id" class="form-select" required>
                                     <?php foreach ($categorias as $cat): ?>
